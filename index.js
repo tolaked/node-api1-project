@@ -44,8 +44,27 @@ function getUsers(req, res) {
     );
 }
 
+function getUserById(req, res) {
+  const id = req.params.id;
+  database
+    .findById(id)
+    .then(user => {
+      res.status(200).json({
+        success: true,
+        user
+      });
+    })
+    .catch(err =>
+      res.status(500).json({
+        success: false,
+        err
+      })
+    );
+}
+
 app.post("/api/users", newUser);
 app.get("/api/users", getUsers);
+app.get("/api/users/:id", getUserById);
 
 app.get("*", (req, res) => {
   res.send("Hello there");
