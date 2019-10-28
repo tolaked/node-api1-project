@@ -15,7 +15,7 @@ function newUser(req, res) {
     .then(user => {
       res.status(200).json({
         success: true,
-        user
+        user: { id: user.id, name: name.name }
       });
       console.log(user);
     })
